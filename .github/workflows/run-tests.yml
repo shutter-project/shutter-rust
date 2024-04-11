@@ -12,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     container: ubuntu:24.04
 
+    env:
+      SCCACHE_GHA_ENABLED: "true"
+      RUSTC_WRAPPER: "sccache"
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v4
@@ -20,6 +24,9 @@ jobs:
         run: |
           apt update
           apt install -y libgtk-4-dev cargo
+
+      - name: Run sccache-cache
+        uses: mozilla-actions/sccache-action@v0.0.3
 
       - run: cargo build --verbose
       - run: cargo test --verbose
