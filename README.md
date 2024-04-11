@@ -1,1 +1,1 @@
-# shutter-rust
+Rewrite of Shutter on Rust
