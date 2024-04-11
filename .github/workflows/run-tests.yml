@@ -10,16 +10,16 @@ on:
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+    container: ubuntu:24.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Install deps
         run: |
-          sudo apt update
-          sudo apt install libgtk-4-dev
-          rustup update stable && rustup default stable
+          apt update
+          apt install -y libgtk-4-dev cargo
 
       - run: cargo build --verbose
       - run: cargo test --verbose
