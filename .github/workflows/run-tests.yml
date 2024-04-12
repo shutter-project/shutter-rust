@@ -10,6 +10,7 @@ on:
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+    # Requires newer gtk-4 than what's available in default 22.04, therefore using docker
     container: ubuntu:24.04
 
     env:
@@ -23,10 +24,15 @@ jobs:
       - name: Install deps
         run: |
           apt update
-          apt install -y libgtk-4-dev cargo
+          apt install -y libgtk-4-dev cargo rust-clippy
 
       - name: Run sccache-cache
         uses: mozilla-actions/sccache-action@v0.0.3
 
       - run: cargo build --verbose
       - run: cargo test --verbose
+
+      - uses: giraffate/clippy-action@v1
+        with:
+          reporter: 'github-pr-review'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
