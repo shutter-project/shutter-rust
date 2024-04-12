@@ -18,7 +18,7 @@ fn main() -> glib::ExitCode {
         .build();
     app.add_main_option(
         "version",
-        ('v' as u8).into(),
+        b'v'.into(),
         glib::OptionFlags::NONE,
         glib::OptionArg::None,
         "Prints version information",
@@ -48,7 +48,7 @@ fn lcmdline(_: &gtk::Application, cmd: &glib::VariantDict) -> i32 {
     -1
 }
 
-fn cmdline(app: &gtk::Application, cmd: &gio::ApplicationCommandLine) -> i32 {
+fn cmdline(_app: &gtk::Application, cmd: &gio::ApplicationCommandLine) -> i32 {
     println!(
         "cmdline, {:?} {:?}",
         cmd.options_dict().end(),

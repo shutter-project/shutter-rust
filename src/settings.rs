@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug)]
 pub struct Settings {
-    opt: Opt,
+    _opt: Opt,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -43,7 +43,7 @@ fn debool<'de, D>(deserializer: D) -> Result<Option<bool>, D::Error> where D: se
     if buf == "1" {
         return Ok(Some(true));
     }
-    return Ok(Some(false));
+    Ok(Some(false))
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -82,6 +82,6 @@ impl Settings {
         let f = std::fs::File::open(dir.join("settings.xml"))?;
         let f = std::io::BufReader::new(f);
         let xml: Opt = quick_xml::de::from_reader(f)?;
-        Ok(Settings { opt: xml })
+        Ok(Settings { _opt: xml })
     }
 }
