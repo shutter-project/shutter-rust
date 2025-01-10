@@ -1,15 +1,17 @@
+cargo-features = ["edition2024"]
+
 [package]
 name = "shutter-rust"
 version = "0.999.1"
-edition = "2021"
+edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-anyhow = "1.0.81"
-gtk = { version = "0.8.1", package = "gtk4", features = ["v4_12"] }
+anyhow = "1.0.95"
+gtk = { version = "0.9.5", package = "gtk4", features = ["v4_14"] }
 quick-xml = { version = "0.31.0", features = ["serialize"] }
-serde = { version = "1.0.197", features = ["derive"] }
+serde = { version = "1.0.217", features = ["derive"] }
 xdg = "2.5.2"
 
 [build-dependencies]
