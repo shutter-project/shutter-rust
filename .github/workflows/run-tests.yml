@@ -24,7 +24,7 @@ jobs:
       - name: Install deps
         run: |
           apt update
-          apt install -y libgtk-4-dev cargo rust-clippy meson gettext blueprint-compiler
+          apt install -y libgtk-4-dev cargo rust-clippy meson gettext blueprint-compiler desktop-file-utils
 
       - name: Run sccache-cache
         uses: mozilla-actions/sccache-action@v0.0.3
