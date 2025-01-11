@@ -1,83 +1,56 @@
-mod mainwindow;
-mod editorwindow;
+/* main.rs
+ *
+ * Copyright 2025 Unknown
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+mod application;
+mod config;
 mod settings;
+mod window;
 
-use gtk::prelude::*;
+use self::application::ShutterRustApplication;
+use self::window::ShutterRustWindow;
+
+use config::{GETTEXT_PACKAGE, LOCALEDIR, PKGDATADIR};
+use gettextrs::{bind_textdomain_codeset, bindtextdomain, textdomain};
 use gtk::{gio, glib};
-
-const SHUTTER_DBUS_PATH: &str = "org.shutter-project.Shutter.Rust";
-const SHUTTER_VERSION: &str = env!("CARGO_PKG_VERSION");
+use gtk::prelude::*;
 
 fn main() -> glib::ExitCode {
-    gio::resources_register_include!("shutter.gresource").expect("Failed to register resources.");
+    // Set up gettext translations
+    bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR).expect("Unable to bind the text domain");
+    bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8")
+        .expect("Unable to set the text domain encoding");
+    textdomain(GETTEXT_PACKAGE).expect("Unable to switch to the text domain");
 
-    // Create a new application
-    let app = gtk::Application::builder()
-        .application_id(SHUTTER_DBUS_PATH)
-        .flags(gio::ApplicationFlags::HANDLES_COMMAND_LINE)
-        .build();
-    app.add_main_option(
-        "version",
-        b'v'.into(),
-        glib::OptionFlags::NONE,
-        glib::OptionArg::None,
-        "Prints version information",
-        None,
-    );
+    // Load resources
+    let resources = gio::Resource::load(PKGDATADIR.to_owned() + "/shutter-rust.gresource")
+        .expect("Could not load resources");
+    gio::resources_register(&resources);
 
-    app.connect_startup(startup);
-    app.connect_activate(|_| {});
-    app.connect_handle_local_options(lcmdline);
-    app.connect_command_line(cmdline);
+    // Create a new GtkApplication. The application manages our main loop,
+    // application windows, integration with the window manager/compositor, and
+    // desktop features such as file opening and single-instance applications.
+    let app = ShutterRustApplication::new("org.shutterproject.ShutterRust", &gio::ApplicationFlags::empty());
 
-    // Run the application
+    // Run the application. This function will block until the application
+    // exits. Upon return, we have our exit code to return to the shell. (This
+    // is the code you see when you do `echo $?` after running a command in a
+    // terminal.
     app.run()
-}
-
-fn lcmdline(_: &gtk::Application, cmd: &glib::VariantDict) -> i32 {
-    if cmd.contains("version") {
-        println!("Shutter {}", SHUTTER_VERSION);
-        println!(
-            "Gtk {}.{}.{}",
-            gtk::major_version(),
-            gtk::minor_version(),
-            gtk::micro_version()
-        );
-        return 0;
-    }
-    -1
-}
-
-fn cmdline(_app: &gtk::Application, cmd: &gio::ApplicationCommandLine) -> i32 {
-    println!(
-        "cmdline, {:?} {:?}",
-        cmd.options_dict().end(),
-        cmd.arguments()
-    );
-    -1
-}
-
-fn startup(app: &gtk::Application) {
-    println!("startup");
-
-    let settings = settings::Settings::load();
-    println!("{:?}", settings);
-
-    // Create a window and set the title
-
-    let window = mainwindow::MainWindow::new(app);
-    // Despite what docs are saying, this is necessary, and cannot be set from .ui
-    window.set_property("show-menubar", true);
-
-    app.add_action_entries([gio::ActionEntry::builder("quit")
-        .activate(|a: &gtk::Application, _, _| {
-            a.quit();
-        })
-        .build()]);
-
-    // Present window
-    window.present();
-
-    let editor = editorwindow::EditorWindow::new(app);
-    editor.present();
 }

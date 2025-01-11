@@ -1,0 +1,31 @@
+using Gtk 4.0;
+
+menu menubar {
+  submenu {
+    label: _("Aaa");
+
+    item {
+      label: _("_Preferences");
+      action: "app.preferences";
+    }
+
+    item {
+      label: _("_Keyboard Shortcuts");
+      action: "win.show-help-overlay";
+    }
+
+    item {
+      label: _("_About Shutter-Rust");
+      action: "app.about";
+    }
+  }
+
+  submenu {
+    label: _("Bbb");
+
+    item {
+      label: _("Foo");
+      action: "app.about";
+    }
+  }
+}
