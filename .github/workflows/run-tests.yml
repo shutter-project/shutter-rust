@@ -24,7 +24,7 @@ jobs:
       - name: Install deps
         run: |
           apt update
-          apt install -y libgtk-4-dev rustup meson gettext blueprint-compiler desktop-file-utils libxml2-utils
+          apt install -y libgtk-4-dev rustup meson gettext blueprint-compiler libxml2-utils
 
       # TODO: Once this porting project is done, switch to stable
       - run: rustup update --no-self-update nightly && rustup default nightly
@@ -33,7 +33,8 @@ jobs:
         uses: mozilla-actions/sccache-action@v0.0.3
 
       - run: meson setup build
-      - run: meson install -C build
+      - run: meson compile -C build
+      - run: DESTDIR=/tmp/inst meson install -C build
       - run: cargo test --verbose
 
       - uses: giraffate/clippy-action@v1
