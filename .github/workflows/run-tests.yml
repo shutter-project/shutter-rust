@@ -26,7 +26,8 @@ jobs:
           apt update
           apt install -y libgtk-4-dev rustup meson gettext blueprint-compiler desktop-file-utils xmllint
 
-      - run: rustup update --no-self-update stable
+      # TODO: Once this porting project is done, switch to stable
+      - run: rustup update --no-self-update nightly && rustup default nightly
 
       - name: Run sccache-cache
         uses: mozilla-actions/sccache-action@v0.0.3
