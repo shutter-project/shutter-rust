@@ -1,6 +1,3 @@
-# By the time the port is finished, if ever, this won't be experimental anymore
-cargo-features = ["edition2024"]
-
 [package]
 name = "shutter-rust"
 version = "0.999.1"
