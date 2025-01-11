@@ -24,7 +24,7 @@ jobs:
       - name: Install deps
         run: |
           apt update
-          apt install -y libgtk-4-dev rustup meson gettext blueprint-compiler desktop-file-utils
+          apt install -y libgtk-4-dev rustup meson gettext blueprint-compiler desktop-file-utils xmllint
 
       - run: rustup update --no-self-update stable
 
