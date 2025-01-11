@@ -24,12 +24,13 @@ jobs:
       - name: Install deps
         run: |
           apt update
-          apt install -y libgtk-4-dev cargo rust-clippy
+          apt install -y libgtk-4-dev cargo rust-clippy meson
 
       - name: Run sccache-cache
         uses: mozilla-actions/sccache-action@v0.0.3
 
-      - run: cargo build --verbose
+      - run: meson setup build
+      - run: meson install -C build
       - run: cargo test --verbose
 
       - uses: giraffate/clippy-action@v1
