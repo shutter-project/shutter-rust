@@ -16,7 +16,7 @@ gnome.compile_resources('shutter',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
-  dependencies: blueprints,
+  dependencies: [blueprints],
 )
 
 conf = configuration_data()

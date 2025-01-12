@@ -3,7 +3,7 @@
   <id>org.shutter-project.Shutter</id>
   <name>Shutter</name>
   <summary>The feature-rich screenshot tool</summary>
-  <launchable type="desktop-id">shutter.desktop</launchable>
+  <launchable type="desktop-id">org.shutter-project.Shutter.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
   <description>

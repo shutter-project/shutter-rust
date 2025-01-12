@@ -99,16 +99,17 @@ impl ShutterApplication {
     fn show_about(&self) {
         let window = self.active_window().unwrap();
         let about = adw::AboutDialog::builder()
-            //.modal(true)
             .application_icon("shutter")
             // TODO remove extra icons
             .application_icon("org.shutter-project.Shutter")
             .application_icon("shutter")
             .version(VERSION)
-            .developers(vec!["Unknown"])
-            .copyright("© 2025 Unknown")
             .website("https://shutter-project.org")
             .issue_url("https://github.com/shutter-project/shutter/issues")
+            .license_type(gtk::License::Gpl30)
+            .artists(String::from_utf8(gio::resources_lookup_data("/org/shutter-project/Shutter/credits/art", gio::ResourceLookupFlags::empty()).expect("no artist data").to_vec()).expect("can't convert artists to utf8").lines().collect::<Vec<_>>())
+            .developers(String::from_utf8(gio::resources_lookup_data("/org/shutter-project/Shutter/credits/dev", gio::ResourceLookupFlags::empty()).expect("no dev data").to_vec()).expect("can't convert devs to utf8").lines().collect::<Vec<_>>())
+            .copyright(String::from_utf8(gio::resources_lookup_data("/org/shutter-project/Shutter/credits/copyright", gio::ResourceLookupFlags::empty()).expect("no copyright data").to_vec()).expect("can't convert copyright to utf8"))
             .build();
 
         about.present(Some(&window));

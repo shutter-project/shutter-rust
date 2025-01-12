@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/org/shutter-project/Shutter">
-    <file compressed="true" preprocess="xml-stripblanks">window.ui</file>
-    <file compressed="true" preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
-    <file compressed="true" preprocess="xml-stripblanks">gtk/menus.ui</file>
-  </gresource>
+	<gresource prefix="/org/shutter-project/Shutter">
+		<file compressed="true" preprocess="xml-stripblanks">window.ui</file>
+		<file compressed="true" preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
+		<file compressed="true" preprocess="xml-stripblanks">gtk/menus.ui</file>
+		<!-- for about dialog -->
+		<file compressed="true" alias="credits/art">../data/credits/art</file>
+		<file compressed="true" alias="credits/dev">../data/credits/dev</file>
+		<file compressed="true" alias="credits/copyright">../data/credits/copyright</file>
+	</gresource>
 </gresources>
