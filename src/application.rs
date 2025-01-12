@@ -100,7 +100,9 @@ impl ShutterRustApplication {
             .transient_for(&window)
             .modal(true)
             .program_name("shutter-rust")
+            // TODO remove extra icon
             .logo_icon_name("org.shutter-project.ShutterRust")
+            .logo_icon_name("shutter")
             .version(VERSION)
             .authors(vec!["Unknown"])
             .copyright("© 2025 Unknown")
