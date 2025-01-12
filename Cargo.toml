@@ -1,5 +1,5 @@
 [package]
-name = "shutter-rust"
+name = "shutter"
 version = "0.999.1"
 edition = "2024"
 

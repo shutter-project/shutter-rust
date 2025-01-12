@@ -22,7 +22,7 @@ mod imp {
     use gtk::{glib, gio, CompositeTemplate};
 
     #[derive(CompositeTemplate, Default)]
-    #[template(resource = "/org/shutter-project/Shutter/Rust/editorwindow.ui")]
+    #[template(resource = "/org/shutter-project/Shutter/editorwindow.ui")]
     pub struct EditorWindow {
         #[template_child]
         pub button: TemplateChild<gtk::Widget>,

@@ -1,4 +1,4 @@
-application_id = 'org.shutter-project.ShutterRust'
+application_id = 'org.shutter-project.Shutter'
 
 scalable_dir = 'hicolor' / 'scalable' / 'apps'
 install_data(

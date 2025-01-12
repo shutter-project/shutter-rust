@@ -18,27 +18,28 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+use adw::prelude::AdwDialogExt;
 use gtk::prelude::*;
 use adw::subclass::prelude::*;
 use gtk::{gio, glib};
 
 use crate::config::VERSION;
-use crate::ShutterRustWindow;
+use crate::ShutterWindow;
 
 mod imp {
     use super::*;
 
     #[derive(Debug, Default)]
-    pub struct ShutterRustApplication {}
+    pub struct ShutterApplication {}
 
     #[glib::object_subclass]
-    impl ObjectSubclass for ShutterRustApplication {
-        const NAME: &'static str = "ShutterRustApplication";
-        type Type = super::ShutterRustApplication;
+    impl ObjectSubclass for ShutterApplication {
+        const NAME: &'static str = "ShutterApplication";
+        type Type = super::ShutterApplication;
         type ParentType = adw::Application;
     }
 
-    impl ObjectImpl for ShutterRustApplication {
+    impl ObjectImpl for ShutterApplication {
         fn constructed(&self) {
             self.parent_constructed();
             let obj = self.obj();
@@ -47,7 +48,7 @@ mod imp {
         }
     }
 
-    impl ApplicationImpl for ShutterRustApplication {
+    impl ApplicationImpl for ShutterApplication {
         // We connect to the activate callback to create a window when the application
         // has been launched. Additionally, this callback notifies us when the user
         // tries to launch a "second instance" of the application. When they try
@@ -58,7 +59,7 @@ mod imp {
             let window = if let Some(window) = application.active_window() {
                 window
             } else {
-                let window = ShutterRustWindow::new(&*application);
+                let window = ShutterWindow::new(&*application);
                 window.upcast()
             };
 
@@ -67,17 +68,17 @@ mod imp {
         }
     }
 
-    impl GtkApplicationImpl for ShutterRustApplication {}
-    impl AdwApplicationImpl for ShutterRustApplication {}
+    impl GtkApplicationImpl for ShutterApplication {}
+    impl AdwApplicationImpl for ShutterApplication {}
     }
 
 glib::wrapper! {
-    pub struct ShutterRustApplication(ObjectSubclass<imp::ShutterRustApplication>)
+    pub struct ShutterApplication(ObjectSubclass<imp::ShutterApplication>)
         @extends gio::Application, gtk::Application, adw::Application,
         @implements gio::ActionGroup, gio::ActionMap;
 }
 
-impl ShutterRustApplication {
+impl ShutterApplication {
     pub fn new(application_id: &str, flags: &gio::ApplicationFlags) -> Self {
         glib::Object::builder()
             .property("application-id", application_id)
@@ -97,18 +98,19 @@ impl ShutterRustApplication {
 
     fn show_about(&self) {
         let window = self.active_window().unwrap();
-        let about = adw::AboutWindow::builder()
-            .transient_for(&window)
+        let about = adw::AboutDialog::builder()
             //.modal(true)
-            .application_icon("shutter-rust")
-            // TODO remove extra icon
-            .application_icon("org.shutter-project.ShutterRust")
+            .application_icon("shutter")
+            // TODO remove extra icons
+            .application_icon("org.shutter-project.Shutter")
             .application_icon("shutter")
             .version(VERSION)
             .developers(vec!["Unknown"])
             .copyright("© 2025 Unknown")
+            .website("https://shutter-project.org")
+            .issue_url("https://github.com/shutter-project/shutter/issues")
             .build();
 
-        about.present();
+        about.present(Some(&window));
     }
 }

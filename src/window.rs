@@ -26,8 +26,8 @@ mod imp {
     use super::*;
 
     #[derive(Debug, Default, gtk::CompositeTemplate)]
-    #[template(resource = "/org/shutter-project/ShutterRust/window.ui")]
-    pub struct ShutterRustWindow {
+    #[template(resource = "/org/shutter-project/Shutter/window.ui")]
+    pub struct ShutterWindow {
         // Template widgets
         //#[template_child]
         //pub header_bar: TemplateChild<gtk::HeaderBar>,
@@ -36,9 +36,9 @@ mod imp {
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for ShutterRustWindow {
-        const NAME: &'static str = "ShutterRustWindow";
-        type Type = super::ShutterRustWindow;
+    impl ObjectSubclass for ShutterWindow {
+        const NAME: &'static str = "ShutterWindow";
+        type Type = super::ShutterWindow;
         type ParentType = gtk::ApplicationWindow;
 
         fn class_init(klass: &mut Self::Class) {
@@ -50,19 +50,19 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for ShutterRustWindow {}
-    impl WidgetImpl for ShutterRustWindow {}
-    impl WindowImpl for ShutterRustWindow {}
-    impl ApplicationWindowImpl for ShutterRustWindow {}
+    impl ObjectImpl for ShutterWindow {}
+    impl WidgetImpl for ShutterWindow {}
+    impl WindowImpl for ShutterWindow {}
+    impl ApplicationWindowImpl for ShutterWindow {}
 }
 
 glib::wrapper! {
-    pub struct ShutterRustWindow(ObjectSubclass<imp::ShutterRustWindow>)
+    pub struct ShutterWindow(ObjectSubclass<imp::ShutterWindow>)
         @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow,
         @implements gio::ActionGroup, gio::ActionMap;
 }
 
-impl ShutterRustWindow {
+impl ShutterWindow {
     pub fn new<P: glib::object::IsA<gtk::Application>>(application: &P) -> Self {
         glib::Object::builder()
             .property("application", application)

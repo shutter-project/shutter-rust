@@ -11,8 +11,8 @@ blueprints = custom_target('blueprints',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
 )
 
-gnome.compile_resources('shutter-rust',
-  'shutter-rust.gresource.xml',
+gnome.compile_resources('shutter',
+  'shutter.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
@@ -21,7 +21,7 @@ gnome.compile_resources('shutter-rust',
 
 conf = configuration_data()
 conf.set_quoted('VERSION', meson.project_version())
-conf.set_quoted('GETTEXT_PACKAGE', 'shutter-rust')
+conf.set_quoted('GETTEXT_PACKAGE', 'shutter')
 conf.set_quoted('LOCALEDIR', get_option('prefix') / get_option('localedir'))
 conf.set_quoted('PKGDATADIR', pkgdatadir)
 

@@ -1,5 +1,5 @@
 {
-    "id" : "org.shutter-project.ShutterRust",
+    "id" : "org.shutter-project.Shutter",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
@@ -37,7 +37,7 @@
     ],
     "modules" : [
         {
-            "name" : "shutter-rust",
+            "name" : "shutter",
             "builddir" : true,
             "buildsystem" : "meson",
             "sources" : [
