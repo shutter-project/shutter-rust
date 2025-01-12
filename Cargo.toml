@@ -4,6 +4,7 @@ version = "0.999.1"
 edition = "2024"
 
 [dependencies]
+adw = { package = "libadwaita", version = "0.7.1", features = ["v1_5"] }
 anyhow = "1.0.95"
 gettext-rs = { version = "0.7", features = ["gettext-system"] }
 gtk = { version = "0.9.5", package = "gtk4", features = ["v4_14"] }

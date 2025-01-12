@@ -19,7 +19,7 @@
  */
 
 use gtk::prelude::*;
-use gtk::subclass::prelude::*;
+use adw::subclass::prelude::*;
 use gtk::{gio, glib};
 
 use crate::config::VERSION;
@@ -35,7 +35,7 @@ mod imp {
     impl ObjectSubclass for ShutterRustApplication {
         const NAME: &'static str = "ShutterRustApplication";
         type Type = super::ShutterRustApplication;
-        type ParentType = gtk::Application;
+        type ParentType = adw::Application;
     }
 
     impl ObjectImpl for ShutterRustApplication {
@@ -68,11 +68,12 @@ mod imp {
     }
 
     impl GtkApplicationImpl for ShutterRustApplication {}
+    impl AdwApplicationImpl for ShutterRustApplication {}
     }
 
 glib::wrapper! {
     pub struct ShutterRustApplication(ObjectSubclass<imp::ShutterRustApplication>)
-        @extends gio::Application, gtk::Application, 
+        @extends gio::Application, gtk::Application, adw::Application,
         @implements gio::ActionGroup, gio::ActionMap;
 }
 
@@ -96,15 +97,15 @@ impl ShutterRustApplication {
 
     fn show_about(&self) {
         let window = self.active_window().unwrap();
-        let about = gtk::AboutDialog::builder()
+        let about = adw::AboutWindow::builder()
             .transient_for(&window)
-            .modal(true)
-            .program_name("shutter-rust")
+            //.modal(true)
+            .application_icon("shutter-rust")
             // TODO remove extra icon
-            .logo_icon_name("org.shutter-project.ShutterRust")
-            .logo_icon_name("shutter")
+            .application_icon("org.shutter-project.ShutterRust")
+            .application_icon("shutter")
             .version(VERSION)
-            .authors(vec!["Unknown"])
+            .developers(vec!["Unknown"])
             .copyright("© 2025 Unknown")
             .build();
 

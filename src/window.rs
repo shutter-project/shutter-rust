@@ -58,7 +58,8 @@ mod imp {
 
 glib::wrapper! {
     pub struct ShutterRustWindow(ObjectSubclass<imp::ShutterRustWindow>)
-        @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow,        @implements gio::ActionGroup, gio::ActionMap;
+        @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow,
+        @implements gio::ActionGroup, gio::ActionMap;
 }
 
 impl ShutterRustWindow {
