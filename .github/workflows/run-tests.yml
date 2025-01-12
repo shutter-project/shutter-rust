@@ -20,11 +20,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install deps
         run: |
           apt update
-          apt install -y libgtk-4-dev rustup meson gettext blueprint-compiler desktop-file-utils libxml2-utils
+          apt install -y libgtk-4-dev rustup meson gettext blueprint-compiler desktop-file-utils libxml2-utils libadwaita-1-dev
 
       # TODO: Once this porting project is done, switch to stable
       - run: rustup update --no-self-update nightly && rustup default nightly
