@@ -19,99 +19,134 @@
  */
 
 use adw::prelude::AdwDialogExt;
-use gtk::prelude::*;
 use adw::subclass::prelude::*;
+use gtk::prelude::*;
 use gtk::{gio, glib};
 
-use crate::config::VERSION;
 use crate::ShutterWindow;
+use crate::config::VERSION;
 
 mod imp {
-    use super::*;
+	use super::*;
 
-    #[derive(Debug, Default)]
-    pub struct ShutterApplication {}
+	#[derive(Debug, Default)]
+	pub struct ShutterApplication {}
 
-    #[glib::object_subclass]
-    impl ObjectSubclass for ShutterApplication {
-        const NAME: &'static str = "ShutterApplication";
-        type Type = super::ShutterApplication;
-        type ParentType = adw::Application;
-    }
+	#[glib::object_subclass]
+	impl ObjectSubclass for ShutterApplication {
+		type ParentType = adw::Application;
+		type Type = super::ShutterApplication;
 
-    impl ObjectImpl for ShutterApplication {
-        fn constructed(&self) {
-            self.parent_constructed();
-            let obj = self.obj();
-            obj.setup_gactions();
-            obj.set_accels_for_action("app.quit", &["<primary>q"]);
-        }
-    }
+		const NAME: &'static str = "ShutterApplication";
+	}
 
-    impl ApplicationImpl for ShutterApplication {
-        // We connect to the activate callback to create a window when the application
-        // has been launched. Additionally, this callback notifies us when the user
-        // tries to launch a "second instance" of the application. When they try
-        // to do that, we'll just present any existing window.
-        fn activate(&self) {
-            let application = self.obj();
-            // Get the current window or create one if necessary
-            let window = if let Some(window) = application.active_window() {
-                window
-            } else {
-                let window = ShutterWindow::new(&*application);
-                window.upcast()
-            };
+	impl ObjectImpl for ShutterApplication {
+		fn constructed(&self) {
+			self.parent_constructed();
+			let obj = self.obj();
+			obj.setup_gactions();
+			obj.set_accels_for_action("app.quit", &["<primary>q"]);
+		}
+	}
 
-            // Ask the window manager/compositor to present the window
-            window.present();
-        }
-    }
+	impl ApplicationImpl for ShutterApplication {
+		// We connect to the activate callback to create a window when the application
+		// has been launched. Additionally, this callback notifies us when the user
+		// tries to launch a "second instance" of the application. When they try
+		// to do that, we'll just present any existing window.
+		fn activate(&self) {
+			let application = self.obj();
+			// Get the current window or create one if necessary
+			let window = if let Some(window) = application.active_window() {
+				window
+			} else {
+				let window = ShutterWindow::new(&*application);
+				window.upcast()
+			};
 
-    impl GtkApplicationImpl for ShutterApplication {}
-    impl AdwApplicationImpl for ShutterApplication {}
-    }
+			// Ask the window manager/compositor to present the window
+			window.present();
+		}
+	}
+
+	impl GtkApplicationImpl for ShutterApplication {}
+	impl AdwApplicationImpl for ShutterApplication {}
+}
 
 glib::wrapper! {
-    pub struct ShutterApplication(ObjectSubclass<imp::ShutterApplication>)
-        @extends gio::Application, gtk::Application, adw::Application,
-        @implements gio::ActionGroup, gio::ActionMap;
+	pub struct ShutterApplication(ObjectSubclass<imp::ShutterApplication>)
+		@extends gio::Application, gtk::Application, adw::Application,
+		@implements gio::ActionGroup, gio::ActionMap;
 }
 
 impl ShutterApplication {
-    pub fn new(application_id: &str, flags: &gio::ApplicationFlags) -> Self {
-        glib::Object::builder()
-            .property("application-id", application_id)
-            .property("flags", flags)
-            .build()
-    }
+	pub fn new(application_id: &str, flags: &gio::ApplicationFlags) -> Self {
+		glib::Object::builder()
+			.property("application-id", application_id)
+			.property("flags", flags)
+			.build()
+	}
 
-    fn setup_gactions(&self) {
-        let quit_action = gio::ActionEntry::builder("quit")
-            .activate(move |app: &Self, _, _| app.quit())
-            .build();
-        let about_action = gio::ActionEntry::builder("about")
-            .activate(move |app: &Self, _, _| app.show_about())
-            .build();
-        self.add_action_entries([quit_action, about_action]);
-    }
+	fn setup_gactions(&self) {
+		let quit_action = gio::ActionEntry::builder("quit")
+			.activate(move |app: &Self, _, _| app.quit())
+			.build();
+		let about_action = gio::ActionEntry::builder("about")
+			.activate(move |app: &Self, _, _| app.show_about())
+			.build();
+		self.add_action_entries([quit_action, about_action]);
+	}
 
-    fn show_about(&self) {
-        let window = self.active_window().unwrap();
-        let about = adw::AboutDialog::builder()
-            .application_icon("shutter")
-            // TODO remove extra icons
-            .application_icon("org.shutter-project.Shutter")
-            .application_icon("shutter")
-            .version(VERSION)
-            .website("https://shutter-project.org")
-            .issue_url("https://github.com/shutter-project/shutter/issues")
-            .license_type(gtk::License::Gpl30)
-            .artists(String::from_utf8(gio::resources_lookup_data("/org/shutter-project/Shutter/credits/art", gio::ResourceLookupFlags::empty()).expect("no artist data").to_vec()).expect("can't convert artists to utf8").lines().collect::<Vec<_>>())
-            .developers(String::from_utf8(gio::resources_lookup_data("/org/shutter-project/Shutter/credits/dev", gio::ResourceLookupFlags::empty()).expect("no dev data").to_vec()).expect("can't convert devs to utf8").lines().collect::<Vec<_>>())
-            .copyright(String::from_utf8(gio::resources_lookup_data("/org/shutter-project/Shutter/credits/copyright", gio::ResourceLookupFlags::empty()).expect("no copyright data").to_vec()).expect("can't convert copyright to utf8"))
-            .build();
+	fn show_about(&self) {
+		let window = self.active_window().unwrap();
+		let about = adw::AboutDialog::builder()
+			.application_icon("shutter")
+			// TODO remove extra icons
+			.application_icon("org.shutter-project.Shutter")
+			.application_icon("shutter")
+			.version(VERSION)
+			.website("https://shutter-project.org")
+			.issue_url("https://github.com/shutter-project/shutter/issues")
+			.license_type(gtk::License::Gpl30)
+			.artists(
+				String::from_utf8(
+					gio::resources_lookup_data(
+						"/org/shutter-project/Shutter/credits/art",
+						gio::ResourceLookupFlags::empty(),
+					)
+					.expect("no artist data")
+					.to_vec(),
+				)
+				.expect("can't convert artists to utf8")
+				.lines()
+				.collect::<Vec<_>>(),
+			)
+			.developers(
+				String::from_utf8(
+					gio::resources_lookup_data(
+						"/org/shutter-project/Shutter/credits/dev",
+						gio::ResourceLookupFlags::empty(),
+					)
+					.expect("no dev data")
+					.to_vec(),
+				)
+				.expect("can't convert devs to utf8")
+				.lines()
+				.collect::<Vec<_>>(),
+			)
+			.copyright(
+				String::from_utf8(
+					gio::resources_lookup_data(
+						"/org/shutter-project/Shutter/credits/copyright",
+						gio::ResourceLookupFlags::empty(),
+					)
+					.expect("no copyright data")
+					.to_vec(),
+				)
+				.expect("can't convert copyright to utf8"),
+			)
+			.build();
 
-        about.present(Some(&window));
-    }
+		about.present(Some(&window));
+	}
 }

@@ -23,50 +23,51 @@ use gtk::subclass::prelude::*;
 use gtk::{gio, glib};
 
 mod imp {
-    use super::*;
+	use super::*;
 
-    #[derive(Debug, Default, gtk::CompositeTemplate)]
-    #[template(resource = "/org/shutter-project/Shutter/window.ui")]
-    pub struct ShutterWindow {
-        // Template widgets
-        //#[template_child]
-        //pub header_bar: TemplateChild<gtk::HeaderBar>,
-        #[template_child]
-        pub label: TemplateChild<gtk::Label>,
-    }
+	#[derive(Debug, Default, gtk::CompositeTemplate)]
+	#[template(resource = "/org/shutter-project/Shutter/window.ui")]
+	pub struct ShutterWindow {
+		// Template widgets
+		//#[template_child]
+		//pub header_bar: TemplateChild<gtk::HeaderBar>,
+		#[template_child]
+		pub label: TemplateChild<gtk::Label>,
+	}
 
-    #[glib::object_subclass]
-    impl ObjectSubclass for ShutterWindow {
-        const NAME: &'static str = "ShutterWindow";
-        type Type = super::ShutterWindow;
-        type ParentType = gtk::ApplicationWindow;
+	#[glib::object_subclass]
+	impl ObjectSubclass for ShutterWindow {
+		type ParentType = gtk::ApplicationWindow;
+		type Type = super::ShutterWindow;
 
-        fn class_init(klass: &mut Self::Class) {
-            klass.bind_template();
-        }
+		const NAME: &'static str = "ShutterWindow";
 
-        fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
-            obj.init_template();
-        }
-    }
+		fn class_init(klass: &mut Self::Class) {
+			klass.bind_template();
+		}
 
-    impl ObjectImpl for ShutterWindow {}
-    impl WidgetImpl for ShutterWindow {}
-    impl WindowImpl for ShutterWindow {}
-    impl ApplicationWindowImpl for ShutterWindow {}
+		fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
+			obj.init_template();
+		}
+	}
+
+	impl ObjectImpl for ShutterWindow {}
+	impl WidgetImpl for ShutterWindow {}
+	impl WindowImpl for ShutterWindow {}
+	impl ApplicationWindowImpl for ShutterWindow {}
 }
 
 glib::wrapper! {
-    pub struct ShutterWindow(ObjectSubclass<imp::ShutterWindow>)
-        @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow,
-        @implements gio::ActionGroup, gio::ActionMap;
+	pub struct ShutterWindow(ObjectSubclass<imp::ShutterWindow>)
+		@extends gtk::Widget, gtk::Window, gtk::ApplicationWindow,
+		@implements gio::ActionGroup, gio::ActionMap;
 }
 
 impl ShutterWindow {
-    pub fn new<P: glib::object::IsA<gtk::Application>>(application: &P) -> Self {
-        glib::Object::builder()
-            .property("application", application)
-            .property("show-menubar", true)
-            .build()
-    }
+	pub fn new<P: glib::object::IsA<gtk::Application>>(application: &P) -> Self {
+		glib::Object::builder()
+			.property("application", application)
+			.property("show-menubar", true)
+			.build()
+	}
 }
