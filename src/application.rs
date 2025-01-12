@@ -79,6 +79,13 @@ glib::wrapper! {
 		@implements gio::ActionGroup, gio::ActionMap;
 }
 
+fn load_string(path: &str) -> String {
+	let Ok(data) = gio::resources_lookup_data(path, gio::ResourceLookupFlags::empty()) else {
+		return format!("{path} not found");
+	};
+	String::from_utf8(data.to_vec()).unwrap_or_else(|e| format!("{path} is invalid utf8 {e}"))
+}
+
 impl ShutterApplication {
 	pub fn new(application_id: &str, flags: &gio::ApplicationFlags) -> Self {
 		glib::Object::builder()
@@ -109,42 +116,18 @@ impl ShutterApplication {
 			.issue_url("https://github.com/shutter-project/shutter/issues")
 			.license_type(gtk::License::Gpl30)
 			.artists(
-				String::from_utf8(
-					gio::resources_lookup_data(
-						"/org/shutter-project/Shutter/credits/art",
-						gio::ResourceLookupFlags::empty(),
-					)
-					.expect("no artist data")
-					.to_vec(),
-				)
-				.expect("can't convert artists to utf8")
-				.lines()
-				.collect::<Vec<_>>(),
+				load_string("/org/shutter-project/Shutter/credits/art")
+					.lines()
+					.collect::<Vec<_>>(),
 			)
 			.developers(
-				String::from_utf8(
-					gio::resources_lookup_data(
-						"/org/shutter-project/Shutter/credits/dev",
-						gio::ResourceLookupFlags::empty(),
-					)
-					.expect("no dev data")
-					.to_vec(),
-				)
-				.expect("can't convert devs to utf8")
-				.lines()
-				.collect::<Vec<_>>(),
+				load_string("/org/shutter-project/Shutter/credits/dev")
+					.lines()
+					.collect::<Vec<_>>(),
 			)
-			.copyright(
-				String::from_utf8(
-					gio::resources_lookup_data(
-						"/org/shutter-project/Shutter/credits/copyright",
-						gio::ResourceLookupFlags::empty(),
-					)
-					.expect("no copyright data")
-					.to_vec(),
-				)
-				.expect("can't convert copyright to utf8"),
-			)
+			.copyright(load_string(
+				"/org/shutter-project/Shutter/credits/copyright",
+			))
 			.build();
 
 		about.present(Some(&window));
