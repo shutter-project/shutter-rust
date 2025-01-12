@@ -1,5 +1,5 @@
 {
-    "id" : "org.shutterproject.ShutterRust",
+    "id" : "org.shutter-project.ShutterRust",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",

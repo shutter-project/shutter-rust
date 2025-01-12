@@ -100,7 +100,7 @@ impl ShutterRustApplication {
             .transient_for(&window)
             .modal(true)
             .program_name("shutter-rust")
-            .logo_icon_name("org.shutterproject.ShutterRust")
+            .logo_icon_name("org.shutter-project.ShutterRust")
             .version(VERSION)
             .authors(vec!["Unknown"])
             .copyright("© 2025 Unknown")

@@ -26,7 +26,7 @@ mod imp {
     use super::*;
 
     #[derive(Debug, Default, gtk::CompositeTemplate)]
-    #[template(resource = "/org/shutterproject/ShutterRust/window.ui")]
+    #[template(resource = "/org/shutter-project/ShutterRust/window.ui")]
     pub struct ShutterRustWindow {
         // Template widgets
         //#[template_child]

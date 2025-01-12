@@ -1,6 +1,6 @@
-data/org.shutterproject.ShutterRust.desktop.in
-data/org.shutterproject.ShutterRust.metainfo.xml.in
-data/org.shutterproject.ShutterRust.gschema.xml
+data/org.shutter-project.ShutterRust.desktop.in
+data/org.shutter-project.ShutterRust.metainfo.xml.in
+data/org.shutter-project.ShutterRust.gschema.xml
 src/window.blp
 src/gtk/menus.blp
 src/gtk/help-overlay.blp

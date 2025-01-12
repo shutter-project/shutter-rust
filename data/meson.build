@@ -1,6 +1,6 @@
 desktop_file = i18n.merge_file(
-        input: 'org.shutterproject.ShutterRust.desktop.in',
-       output: 'org.shutterproject.ShutterRust.desktop',
+        input: 'org.shutter-project.ShutterRust.desktop.in',
+       output: 'org.shutter-project.ShutterRust.desktop',
          type: 'desktop',
        po_dir: '../po',
       install: true,
@@ -13,8 +13,8 @@ if desktop_utils.found()
 endif
 
 appstream_file = i18n.merge_file(
-        input: 'org.shutterproject.ShutterRust.metainfo.xml.in',
-       output: 'org.shutterproject.ShutterRust.metainfo.xml',
+        input: 'org.shutter-project.ShutterRust.metainfo.xml.in',
+       output: 'org.shutter-project.ShutterRust.metainfo.xml',
        po_dir: '../po',
       install: true,
   install_dir: get_option('datadir') / 'metainfo'
@@ -24,7 +24,7 @@ appstreamcli = find_program('appstreamcli', required: false, disabler: true)
 test('Validate appstream file', appstreamcli,
      args: ['validate', '--no-net', '--explain', appstream_file])
 
-install_data('org.shutterproject.ShutterRust.gschema.xml',
+install_data('org.shutter-project.ShutterRust.gschema.xml',
   install_dir: get_option('datadir') / 'glib-2.0' / 'schemas'
 )
 

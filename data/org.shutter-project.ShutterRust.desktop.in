@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=shutter-rust
 Exec=shutter-rust
-Icon=org.shutterproject.ShutterRust
+Icon=org.shutter-project.ShutterRust
 Terminal=false
 Type=Application
 Categories=GTK;
