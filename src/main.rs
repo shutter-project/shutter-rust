@@ -46,8 +46,9 @@ fn main() -> glib::ExitCode {
 	// Create a new GtkApplication. The application manages our main loop,
 	// application windows, integration with the window manager/compositor, and
 	// desktop features such as file opening and single-instance applications.
+	// TODO: remove the Rust suffix. This is for D-Bus to avoid conflict with the perl shutter
 	let app = ShutterApplication::new(
-		"org.shutter-project.Shutter",
+		"org.shutter-project.ShutterRust",
 		&gio::ApplicationFlags::empty(),
 	);
 

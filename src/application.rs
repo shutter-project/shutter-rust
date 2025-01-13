@@ -105,7 +105,6 @@ impl ShutterApplication {
 	}
 
 	fn show_about(&self) {
-		let window = self.active_window().unwrap();
 		let about = adw::AboutDialog::builder()
 			.application_name("Shutter")
 			// TODO remove extra icons
@@ -130,6 +129,6 @@ impl ShutterApplication {
 			))
 			.build();
 
-		about.present(Some(&window));
+		about.present(self.active_window().as_ref());
 	}
 }

@@ -3,7 +3,18 @@
 	<gresource prefix="/org/shutter-project/Shutter">
 		<file compressed="true" preprocess="xml-stripblanks">window.ui</file>
 		<file compressed="true" preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
-		<file compressed="true" preprocess="xml-stripblanks">gtk/menus.ui</file>
+		<file compressed="true" >gtk/menus.ui</file>
+		<!-- for about dialog -->
+		<file compressed="true" alias="credits/art">../data/credits/art</file>
+		<file compressed="true" alias="credits/dev">../data/credits/dev</file>
+		<file compressed="true" alias="credits/copyright">../data/credits/copyright</file>
+	</gresource>
+
+	<!-- a temporary hack to support the non-conflicting D-Bus name because Gtk uses the same id for both -->
+	<gresource prefix="/org/shutter-project/ShutterRust">
+		<file compressed="true" preprocess="xml-stripblanks">window.ui</file>
+		<file compressed="true" preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
+		<file compressed="true" >gtk/menus.ui</file>
 		<!-- for about dialog -->
 		<file compressed="true" alias="credits/art">../data/credits/art</file>
 		<file compressed="true" alias="credits/dev">../data/credits/dev</file>
