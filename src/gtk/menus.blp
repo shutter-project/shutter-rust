@@ -2,17 +2,83 @@ using Gtk 4.0;
 
 menu menubar {
 	submenu {
-		label: _("Aaa");
+		label: _("_File");
+
+		section {
+			item {
+				label: _("_New");
+				icon: "document-new";
+			}
+		}
+		section {
+			item {
+				label: _("_Open");
+				icon: "document-open";
+			}
+			submenu {
+				label: _("Recent _Files");
+			}
+		}
+		section {
+			item {
+				label: _("Save _As...");
+				icon: "document-save-as";
+			}
+			item {
+				label: _("E_xport to PDF...");
+			}
+			item {
+				label: _("Export to Post_Script...");
+			}
+		}
+		section {
+			item {
+				label: _("Page Set_up");
+				icon: "document-page-setup";
+			}
+			item {
+				label: _("_Print");
+				icon: "document-print";
+			}
+		}
+		section {
+			item {
+				label: _("_Close");
+				icon: "document-close";
+			}
+			item {
+				label: _("C_lose all");
+				icon: "document-close";
+			}
+		}
+		section {
+			item {
+				label: _("_Quit");
+				icon: "gtk-quit";
+				action: "app.quit";
+			}
+		}
+	}
+
+	submenu {
+		label: _("_Edit");
 
 		item {
 			label: _("_Preferences");
 			action: "app.preferences";
 		}
+	}
 
-		item {
-			label: _("_About Shutter-Rust");
-			action: "app.about";
-		}
+	submenu {
+		label: _("_View");
+	}
+
+	submenu {
+		label: _("_Screenshot");
+	}
+
+	submenu {
+		label: _("_Go");
 	}
 
 	submenu {
