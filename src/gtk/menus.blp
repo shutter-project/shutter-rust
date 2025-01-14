@@ -5,9 +5,6 @@ menu menubar {
 		label: _("_File");
 
 		section {
-			item (_("_New"), "", "document-new")
-		}
-		section {
 			item (_("_Open"), "", "document-open")
 			submenu {
 				label: _("Recent _Files");
@@ -81,16 +78,84 @@ menu menubar {
 
 	submenu {
 		label: _("_Screenshot");
+
+		section {
+			item (_("_Redo last screenshot"), "", "view-refresh")
+		}
+
+		section {
+			item (_("_Selection"), "", "select-rectangular")
+			item (_("_Desktop"), "", "desktop")
+			item (_("_Active Window"), "", "resource:///org/shutter-project/Shutter/icons/sel_window_active.svg")
+			item (_("S_elect Window"), "", "resource:///org/shutter-project/Shutter/icons/sel_window.svg")
+			submenu {
+				label: _("_Window");
+				icon: "window";
+			}
+			item (_("_Menu"), "", "resource:///org/shutter-project/Shutter/icons/sel_window_menu.svg")
+			item (_("_Tooltip"), "", "resource:///org/shutter-project/Shutter/icons/sel_window_tooltip.svg")
+			item (_("_Web"), "", "internet-web-browser")
+		}
+
+		section {
+			item (_("Import from _clipboard"), "", "edit-paste")
+		}
+	}
+
+	submenu {
+		label: _("_Actions");
+
+		section {
+			submenu {
+				label: _("_Open with");
+				icon: "document-open";
+			}
+			item (_("Show in _folder"), "", "folder")
+			item (_("_Rename"), "", "edit-rename")
+		}
+		section {
+			item (_("_Send To..."), "", "document-send")
+			item (_("E_xport..."), "", "document-share")
+			submenu {
+				label: _("Public _URLs");
+				icon: "document-share";
+			}
+		}
+		section {
+			item (_("_Edit..."), "", "resource:///org/shutter-project/Shutter/icons/draw.svg")
+			item (_("Run a _plugin..."), "", "gtk-execute")
+		}
+		section {
+			item (_("Redo _this screenshot"), "", "view-refresh")
+		}
 	}
 
 	submenu {
 		label: _("_Go");
+
+		section {
+			item (_("_Back"), "", "draw-arrow-back")
+			item (_("_Forward"), "", "draw-arrow-forward")
+		}
+
+		section {
+			item (_("F_irst"), "", "go-first")
+			item (_("_Last"), "", "go-last")
+		}
 	}
 
 	submenu {
 		label: _("_Help");
 
-		item (_("_Keyboard Shortcuts"), "win.show-help-overlay")
-		item (_("_About"), "app.about")
+		section {
+			item (_("Get _Help Online..."), "", "help-browser")
+			item (_("_Translate this Application..."), "", "translate")
+			item (_("_Report a Problem"), "", "tools-report-bug")
+		}
+
+		section {
+			item (_("_Keyboard Shortcuts"), "win.show-help-overlay", "help-keybord-shortcuts")
+			item (_("_About"), "app.about", "help-about")
+		}
 	}
 }
