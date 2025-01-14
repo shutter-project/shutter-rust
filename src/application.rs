@@ -64,6 +64,11 @@ mod imp {
 				window.upcast()
 			};
 
+			/*let theme =gtk::IconTheme::for_display(&window.clone().upcast::<gtk::Widget>().display());
+			let mut v = theme.icon_names();
+			v.sort();
+			dbg!(v);*/
+
 			// Ask the window manager/compositor to present the window
 			window.present();
 		}

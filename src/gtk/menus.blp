@@ -5,72 +5,78 @@ menu menubar {
 		label: _("_File");
 
 		section {
-			item {
-				label: _("_New");
-				icon: "document-new";
-			}
+			item (_("_New"), "", "document-new")
 		}
 		section {
-			item {
-				label: _("_Open");
-				icon: "document-open";
-			}
+			item (_("_Open"), "", "document-open")
 			submenu {
 				label: _("Recent _Files");
 			}
 		}
 		section {
-			item {
-				label: _("Save _As...");
-				icon: "document-save-as";
-			}
-			item {
-				label: _("E_xport to PDF...");
-			}
-			item {
-				label: _("Export to Post_Script...");
-			}
+			item (_("Save _As..."), "", "document-save-as")
+			item (_("E_xport to PDF..."), "")
+			item (_("Export to Post_Script..."), "")
 		}
 		section {
-			item {
-				label: _("Page Set_up");
-				icon: "document-page-setup";
-			}
-			item {
-				label: _("_Print");
-				icon: "document-print";
-			}
+			item (_("Page Set_up"), "", "document-page-setup")
+			item (_("_Print"), "", "document-print")
 		}
 		section {
-			item {
-				label: _("_Close");
-				icon: "document-close";
-			}
-			item {
-				label: _("C_lose all");
-				icon: "document-close";
-			}
+			item (_("Send by E_mail"), "", "mail-send")
 		}
 		section {
-			item {
-				label: _("_Quit");
-				icon: "gtk-quit";
-				action: "app.quit";
-			}
+			item (_("_Close"), "", "document-close")
+			item (_("C_lose all"), "", "document-close")
+		}
+		section {
+			item (_("_Quit"), "app.quit", "gtk-quit")
 		}
 	}
 
 	submenu {
 		label: _("_Edit");
 
-		item {
-			label: _("_Preferences");
-			action: "app.preferences";
+		section {
+			item (_("_Undo"), "", "edit-undo")
+			item (_("_Redo"), "", "edit-redo")
+		}
+
+		section {
+			item (_("_Copy"), "", "edit-copy")
+			item (_("Copy _Filename"), "", "edit-copy")
+			item (_("Move to _Trash"), "", "user-trash")
+		}
+
+		section {
+			item (_("_Select All"), "", "edit-select-all")
+			submenu {
+				label: _("_Quick profile select");
+			}
+		}
+
+		section {
+			item (_("_Preferences"), "app.preferences", "gtk-preferences")
 		}
 	}
 
 	submenu {
 		label: _("_View");
+
+		section {
+			item (_("Show Navigation _Toolbar"), "")
+		}
+
+		section {
+			item (_("Zoom _In"), "", "zoom-in")
+			item (_("Zoom _Out"), "", "zoom-out")
+			item (_("_Normal Size"), "", "zoom-original")
+			item (_("_Best Fit"), "", "zoom-fit-best")
+		}
+
+		section {
+			item (_("_Fullscreen"), "")
+		}
 	}
 
 	submenu {
@@ -84,14 +90,7 @@ menu menubar {
 	submenu {
 		label: _("_Help");
 
-		item {
-			label: _("_Keyboard Shortcuts");
-			action: "win.show-help-overlay";
-		}
-
-		item {
-			label: _("_About");
-			action: "app.about";
-		}
+		item (_("_Keyboard Shortcuts"), "win.show-help-overlay")
+		item (_("_About"), "app.about")
 	}
 }
