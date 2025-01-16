@@ -13,7 +13,7 @@
 		<file compressed="true" alias="icons/sel_window_active.svg">../data/icons/sel_window_active.svg</file>
 		<file compressed="true" alias="icons/sel_window_menu.svg">../data/icons/sel_window_menu.svg</file>
 		<file compressed="true" alias="icons/sel_window_tooltip.svg">../data/icons/sel_window_tooltip.svg</file>
-		<file compressed="true" alias="icons/draw.svg">../../share/shutter/resources/icons/draw.svg</file>
+		<file compressed="true" alias="icons/draw.svg">../data/icons/draw.svg</file>
 	</gresource>
 
 	<!-- a temporary hack to support the non-conflicting D-Bus name because Gtk uses the same id for both -->
