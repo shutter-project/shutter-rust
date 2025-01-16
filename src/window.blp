@@ -4,11 +4,57 @@ template $ShutterWindow: ApplicationWindow {
 	default-width: 600;
 	default-height: 300;
 
-	child: Label label {
+	child: Box {
+		orientation: vertical;
+
+		Box {
+			Label {
+				label: "Hello";
+			}
+
+			styles [
+				"toolbar",
+			]
+		}
+
+		Notebook {
+			vexpand: true;
+
+			Label {
+				label: "Hello";
+			}
+			[tab]
+			Label {
+				label: "tab";
+			}
+
+			Box{
+				orientation: vertical;
+				Label {
+					label: "World";
+				}
+				Label {
+					label: "Second line";
+				}
+			}
+			[tab]
+			Label {
+				label: "tab2";
+			}
+		}
+
+		Box {
+			Label {
+				label: "Status bar?";
+			}
+		}
+	}
+
+/*	child: Label label {
 		label: "Hello, World!";
 
 		styles [
 			"title-1",
 		]
-	};
+	}*/;
 }
