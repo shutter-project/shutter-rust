@@ -1,16 +1,68 @@
 using Gtk 4.0;
+using Gio 2.0;
 
 template $ShutterWindow: ApplicationWindow {
 	default-width: 600;
 	default-height: 300;
 
-	child: Box {
+	Box {
 		orientation: vertical;
 
 		Box {
-			Label {
-				label: "Hello";
+			Button {
+				tooltip-text: _("Redo last screenshot");
+				icon-name: "view-refresh";
 			}
+			Separator {}
+			Button {
+				tooltip-text: _("Draw a rectangular capture area with your mouse\nto select a specified screen area");
+				Box {
+					Image {
+						gicon: Gio.ThemedIcon {
+							name: "select-rectangular";
+						};
+					}
+					Label {
+						label: _("Selection");
+					}
+				}
+			}
+			Button {
+				tooltip-text: _("Take a screenshot of your whole desktop");
+				Box {
+					Image {
+						gicon: Gio.ThemedIcon {
+							name: "desktop";
+						};
+					}
+					Label {
+						label: _("Desktop");
+					}
+				}
+			}
+			MenuButton {
+				tooltip-text: _("Capture a specific workspace");
+			}
+			Button {
+				tooltip-text: _("Select a window with your mouse");
+				Box {
+					Image {
+						gicon: Gio.FileIcon {
+							file: "resource:///org/shutter-project/Shutter/icons/sel_window.svg";
+						};
+					}
+					Label {
+						label: _("Window");
+					}
+				}
+			}
+			MenuButton {
+				tooltip-text: _("Take a screenshot of a specific window");
+			}
+			Button {
+				tooltip-text: _("Select a single menu or cascading menus from any application");
+			}
+
 
 			styles [
 				"toolbar",
@@ -21,7 +73,7 @@ template $ShutterWindow: ApplicationWindow {
 			vexpand: true;
 
 			Label {
-				label: "Hello";
+				label: "Hello World";
 			}
 			[tab]
 			Label {
@@ -31,7 +83,7 @@ template $ShutterWindow: ApplicationWindow {
 			Box{
 				orientation: vertical;
 				Label {
-					label: "World";
+					label: "First line";
 				}
 				Label {
 					label: "Second line";
@@ -49,12 +101,4 @@ template $ShutterWindow: ApplicationWindow {
 			}
 		}
 	}
-
-/*	child: Label label {
-		label: "Hello, World!";
-
-		styles [
-			"title-1",
-		]
-	}*/;
 }
