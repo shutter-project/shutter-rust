@@ -1,0 +1,65 @@
+# Georgian translation for shutter-rust.
+# Copyright (C) 2026 shutter-rust's authors.
+# This file is distributed under the same license as the shutter-rust package.
+# Ekaterine Papava <papava.e@gtu.ge>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: shutter-rust\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-11 01:39+0000\n"
+"PO-Revision-Date: 2026-02-12 20:37+0100\n"
+"Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
+"Language-Team: Georgian <(nothing)>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#: data/org.shutterproject.ShutterRust.desktop.in:3
+msgid "shutter-rust"
+msgstr "shutter-rust"
+
+#: data/org.shutterproject.ShutterRust.metainfo.xml.in:7
+msgid "No description"
+msgstr "აღწერის გარეშე"
+
+#: src/window.blp:29 src/gtk/menus.blp:8
+msgid "_Preferences"
+msgstr "_მორგება"
+
+#: src/window.blp:34 src/gtk/menus.blp:13
+msgid "_Keyboard Shortcuts"
+msgstr "_კლავიატურის მალსახმობები"
+
+#: src/window.blp:39 src/gtk/menus.blp:18
+msgid "_About Shutter-Rust"
+msgstr "Shutter-Rust-ის შეს_ახებ"
+
+#: src/gtk/menus.blp:5
+msgid "Aaa"
+msgstr "Aaa"
+
+#: src/gtk/menus.blp:24
+msgid "Bbb"
+msgstr "Bbb"
+
+#: src/gtk/menus.blp:27
+msgid "Foo"
+msgstr "Foo"
+
+#: src/gtk/help-overlay.blp:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "ზოგადი"
+
+#: src/gtk/help-overlay.blp:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "მალსახმობების ჩვენება"
+
+#: src/gtk/help-overlay.blp:19
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "გასვლა"
